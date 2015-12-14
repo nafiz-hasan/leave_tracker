@@ -4,6 +4,9 @@ class User < ActiveRecord::Base
   has_many :subordinates, class_name: "User", foreign_key: :ttf_id
   belongs_to :ttf, class_name: "User"
 
+  #creating relationships between sttf and ttf
+  has_many :ttfs, class_name: "User", foreign_key: :sttf_id
+  belongs_to :sttf, class_name: "User"
 
   def self.names
     all.map(&:name)
