@@ -11,13 +11,35 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151214083238) do
+ActiveRecord::Schema.define(version: 20151214100435) do
 
   create_table "allowed_users", force: :cascade do |t|
     t.string   "email"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
+
+  create_table "days", force: :cascade do |t|
+    t.integer  "holiday_id"
+    t.date     "the_date"
+    t.integer  "hours",      default: 8
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
+  end
+
+  add_index "days", ["holiday_id"], name: "index_days_on_holiday_id"
+
+  create_table "holidays", force: :cascade do |t|
+    t.integer  "user_id"
+    t.string   "reason"
+    t.text     "description"
+    t.string   "holiday_type", default: "casual"
+    t.string   "status",       default: "pending"
+    t.datetime "created_at",                       null: false
+    t.datetime "updated_at",                       null: false
+  end
+
+  add_index "holidays", ["user_id"], name: "index_holidays_on_user_id"
 
   create_table "users", force: :cascade do |t|
     t.string   "email",                  default: "", null: false

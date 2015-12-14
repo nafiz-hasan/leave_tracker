@@ -1,0 +1,15 @@
+<%= simple_form_for(@holiday) do |f| %>
+  <%= f.error_notification %>
+
+  <div class="form-inputs">
+    <%= f.association :user %>
+    <%= f.input :reason %>
+    <%= f.input :description %>
+    <%= f.input :holiday_type %>
+    <%= f.input :status %>
+  </div>
+
+  <div class="form-actions">
+    <%= f.button :submit %>
+  </div>
+<% end %>

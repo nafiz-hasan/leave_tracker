@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  holiday_id: 
+  the_date: 2015-12-14
+  hours: 1
+
+two:
+  holiday_id: 
+  the_date: 2015-12-14
+  hours: 1
