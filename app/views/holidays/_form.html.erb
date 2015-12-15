@@ -1,0 +1,24 @@
+<%= simple_form_for @holiday, html: {multipart: true} do |f| %>
+  <% if @holiday.errors.any? %>
+    <div id="errors">
+      <p>
+        <%= pluralize(@holiday.errors.count, "Error") %>
+        Prevented this application from sending
+      </p>
+    </div>
+  <% end %>
+  <div class="panel-body">
+    <%= f.input :reason %>
+    <%= f.input :description %>
+    <%= f.select :holiday_type,  Holiday::HOLIDAY_TYPES %>
+    <div class="row">
+      <div class="col-md-12">
+      <%= f.simple_fields_for :days do |day| %>
+        <%= render 'day_fields', f: day %>
+      <% end %>
+      </div>
+      <%= link_to_add_association 'Add Date', f, :days, class: "btn btn-default add-button" %>
+    </div>
+  </div>
+  <%= f.button :submit, class: "btn btn-primary" %>
+<% end %>
