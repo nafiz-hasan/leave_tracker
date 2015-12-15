@@ -29,6 +29,8 @@ gem 'omniauth'
 gem 'omniauth-google-oauth2'
 gem 'simple_form'
 gem 'bootstrap-sass'
+gem 'cocoon'
+gem 'haml'
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 

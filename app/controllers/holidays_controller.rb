@@ -14,7 +14,8 @@ class HolidaysController < ApplicationController
 
   # GET /holidays/new
   def new
-    @holiday = Holiday.new
+    @holiday = current_user.holidays.build
+    #@days = @holiday.days.build
   end
 
   # GET /holidays/1/edit
@@ -24,8 +25,8 @@ class HolidaysController < ApplicationController
   # POST /holidays
   # POST /holidays.json
   def create
-    @holiday = Holiday.new(holiday_params)
-
+    @holiday = current_user.holidays.build(holiday_params)
+    #@days = @holiday.days.build(params[:days_attributes])
     respond_to do |format|
       if @holiday.save
         format.html { redirect_to @holiday, notice: 'Holiday was successfully created.' }
@@ -69,6 +70,6 @@ class HolidaysController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def holiday_params
-      params.require(:holiday).permit(:user_id, :reason, :description, :holiday_type, :status)
+      params.require(:holiday).permit(:reason, :description, :holiday_type, days_attributes: [:id, :the_date, :_destroy])
     end
 end

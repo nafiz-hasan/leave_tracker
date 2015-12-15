@@ -1,6 +1,5 @@
 class User < ActiveRecord::Base
 
-  has_many :holidays
   #creating self joins between columns for ttf and engineers
   has_many :subordinates, class_name: "User", foreign_key: :ttf_id
   belongs_to :ttf, class_name: "User"
@@ -28,5 +27,7 @@ class User < ActiveRecord::Base
       user.name = auth.info.name
     end
   end
+
+  has_many :holidays
 
 end
