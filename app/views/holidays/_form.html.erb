@@ -12,12 +12,21 @@
     <%= f.input :description %>
     <%= f.select :holiday_type,  Holiday::HOLIDAY_TYPES %>
     <div class="row">
-      <div class="col-md-12">
-      <%= f.simple_fields_for :days do |day| %>
-        <%= render 'day_fields', f: day %>
-      <% end %>
+      <div class="col-md-6">
+          <%= f.simple_fields_for :days do |day| %>
+            <%= render 'day_fields', f: day %>
+            <% end %>
+
+            <%= link_to_add_association 'Add Date', f, :days, class: "btn btn-default add-button" %>
       </div>
-      <%= link_to_add_association 'Add Date', f, :days, class: "btn btn-default add-button" %>
+
+      <div class="col-md-6">
+
+          <%= label_tag "From" %>
+          <%= date_field_tag :start_date %>
+          <%= label_tag "To" %>
+          <%= date_field_tag :end_date %>
+      </div>
     </div>
   </div>
   <%= f.button :submit, class: "btn btn-primary" %>

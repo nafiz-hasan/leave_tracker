@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151214100435) do
+ActiveRecord::Schema.define(version: 20151217043056) do
 
   create_table "allowed_users", force: :cascade do |t|
     t.string   "email"
@@ -22,9 +22,9 @@ ActiveRecord::Schema.define(version: 20151214100435) do
   create_table "days", force: :cascade do |t|
     t.integer  "holiday_id"
     t.date     "the_date"
-    t.integer  "hours",      default: 8
-    t.datetime "created_at",             null: false
-    t.datetime "updated_at",             null: false
+    t.decimal  "hours",      precision: 2, scale: 1, default: 8.0
+    t.datetime "created_at",                                       null: false
+    t.datetime "updated_at",                                       null: false
   end
 
   add_index "days", ["holiday_id"], name: "index_days_on_holiday_id"

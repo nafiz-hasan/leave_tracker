@@ -1,6 +1,7 @@
 <div class="form-inline clearfix">
   <div class="nested-fields">
     <%= f.input :the_date, as: :string, input_html: {type: :date} %>
+    <%= f.number_field :hours, step: 0.5, min: 2.0, max: 8.0  %>
     <%= link_to_remove_association "Remove", f, class: "btn btn-default" %>
   </div>
 </div>

@@ -1,0 +1,32 @@
+<h2>My Employees</h2>
+
+<% if @my_users.size == 0 %>
+    <p>Sorry, you have no employees undersigned</p>
+<% else %>
+    <ul>
+      <% @my_users.each do |u| %>
+          <li> <%= link_to u.name, user_summary_ttfpanel_path(u), remote: true  %></li>
+
+    <% end %>
+    </ul>
+<% end %>
+
+
+<div id="user-modal", class="modal fade">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h3 class="modal-title">Leave Requests</h3>
+      </div>
+      <div class="modal-body">
+
+      </div>
+
+      <div class="modal-footer">
+        <a href="#" class="btn btn-default" data-dismiss="modal">Close</a>
+      </div>
+
+    </div>
+  </div>
+</div>

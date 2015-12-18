@@ -1,8 +1,18 @@
 class HomeController < ApplicationController
   before_action :authenticate_user!
   before_action :check_if_valid_user, only: [:index]
+
   def index
-    @message = "Welcome " + current_user.name
+
+    if current_user.name == nil
+      @message = "Welcome"
+    else
+      @message = "Welcome " + current_user.name
+    end
+
+    @role = current_user.role
+
+
   end
 
   def check_if_valid_user

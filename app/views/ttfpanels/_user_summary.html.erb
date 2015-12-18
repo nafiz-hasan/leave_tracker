@@ -1,0 +1,22 @@
+<table class="table table-bordered table-striped">
+  <thead>
+  <tr>
+    <th>Reason</th>
+    <th>Intended Dates</th>
+    <td>Status</td>
+  </tr>
+  </thead>
+  <tbody class="holiday-index">
+  <% @user_leaves.each do |h| %>
+    <tr>
+      <td><%= h.reason %></td>
+      <td>
+        <% h.days.each do |d| %>
+          <%= d.the_date.strftime("%a, %d %b, %Y") + "     Duration: " +number_to_human(d.hours)  %><br/>
+        <% end %>
+      </td>
+      <td><%= h.status %></td>
+    </tr>
+  <% end %>
+  </tbody>
+</table>

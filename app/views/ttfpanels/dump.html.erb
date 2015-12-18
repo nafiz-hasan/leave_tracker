@@ -1,0 +1,45 @@
+<h1>Leave Applications</h1>
+
+<table border="2px">
+  <thead>
+  <tr>
+    <td>Employee</td>
+    <td>Days</td>
+    <td>Reason</td>
+    <td>Type</td>
+    <td>Status</td>
+  </tr>
+  </thead>
+
+  <tbody>
+  <% if @myapplications.size == 0 %>
+      </tbody></table>
+      <p>Sorry, you have no applications</p>
+  <% else %>
+      <% @myapplications.each do |m|  %>
+          <tr>
+            <td><%= m.user.name %></td>
+            <td><%= m.days.count %></td>
+            <td><%= m.reason %></td>
+            <td><%= m.holiday_type %></td>
+            <td><%= m.status %></td>
+          </tr>
+      <% end %>
+  <% end %>
+
+  </tbody>
+
+  </table>
+
+
+  <h2>My Employees</h2>
+
+  <% if current_user.subordinates.count == 0 %>
+      <p>Sorry, you have no employees undersigned</p>
+  <% else %>
+      <ul>
+        <% current_user.subordinates.each do |e| %>
+            <li> <%= e.name  %></li>
+        <% end %>
+      </ul>
+  <% end %>

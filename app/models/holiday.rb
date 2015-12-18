@@ -8,5 +8,7 @@ class Holiday < ActiveRecord::Base
 
   validates_presence_of :reason, :description
 
+
   HOLIDAY_TYPES = ["Casual", "Sick Leave"]
+  HOLIDAY_STATUS = ["Pending", "Approved", "Rejected"]
 end

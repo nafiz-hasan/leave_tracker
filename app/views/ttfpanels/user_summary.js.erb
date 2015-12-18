@@ -1,0 +1,6 @@
+$modal = $('.modal'),
+$modalBody = $('.modal .modal-body'),
+$modalHeading = $('.modal .modal-header .modal-title');
+$modalHeading.html("<%= @my_user.name %>");
+$modalBody.html("<%= escape_javascript(render 'user_summary') %>");
+$modal.modal();

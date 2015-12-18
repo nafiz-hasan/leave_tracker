@@ -1,6 +1,6 @@
 class HolidaysController < ApplicationController
   before_action :set_holiday, only: [:show, :edit, :update, :destroy]
-
+  after_action :save_range, only: :create
   # GET /holidays
   # GET /holidays.json
   def index
@@ -15,7 +15,7 @@ class HolidaysController < ApplicationController
   # GET /holidays/new
   def new
     @holiday = current_user.holidays.build
-    #@days = @holiday.days.build
+
   end
 
   # GET /holidays/1/edit
@@ -26,7 +26,7 @@ class HolidaysController < ApplicationController
   # POST /holidays.json
   def create
     @holiday = current_user.holidays.build(holiday_params)
-    #@days = @holiday.days.build(params[:days_attributes])
+
     respond_to do |format|
       if @holiday.save
         format.html { redirect_to @holiday, notice: 'Holiday was successfully created.' }
@@ -34,6 +34,14 @@ class HolidaysController < ApplicationController
       else
         format.html { render :new }
         format.json { render json: @holiday.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
+  def save_range
+    if(params.has_key?(:start_date) && params.has_key?(:end_date))
+      (params[:start_date]..params[:end_date]).each do |d|
+        @holiday.days.create!(the_date: d)
       end
     end
   end
@@ -66,10 +74,11 @@ class HolidaysController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_holiday
       @holiday = Holiday.find(params[:id])
+      @days = @holiday.days
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def holiday_params
-      params.require(:holiday).permit(:reason, :description, :holiday_type, days_attributes: [:id, :the_date, :_destroy])
+      params.require(:holiday).permit(:reason, :description, :holiday_type, days_attributes: [:id, :the_date, :hours, :_destroy])
     end
 end
