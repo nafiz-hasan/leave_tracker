@@ -1,0 +1,63 @@
+<p>
+  <strong>User:</strong>
+  <%= link_to @holiday.user.name, user_summary_ttfpanel_path(@holiday.user), remote: true %>
+</p>
+
+<p>
+  <strong>Reason:</strong>
+  <%= @holiday.reason %>
+</p>
+
+<p>
+  <strong>Description:</strong>
+  <%= @holiday.description %>
+</p>
+
+<table class="table table-bordered table-striped">
+  <thead>
+    <tr>
+      <th>Date</th>
+      <th>Duration</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @days.each do |d| %>
+      <tr>
+        <td><%= d.the_date.strftime("%a, %d %b, %Y") %></td>
+        <td><%= d.hours %></td>
+      </tr>
+    <% end %>
+  </tbody>
+
+</table>
+
+<p>
+  <strong>Type:</strong>
+  <%= @holiday.holiday_type %>
+</p>
+
+<p>
+  <strong>Status:</strong>
+  <%= @holiday.status %>
+</p>
+
+
+<div id="user-modal", class="modal fade">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h3 class="modal-title">Leave Requests</h3>
+      </div>
+      <div class="modal-body">
+
+      </div>
+
+      <div class="modal-footer">
+        <a href="#" class="btn btn-default" data-dismiss="modal">Close</a>
+      </div>
+
+    </div>
+  </div>
+</div>

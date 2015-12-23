@@ -6,8 +6,7 @@
     <ul>
       <% @my_users.each do |u| %>
           <li> <%= link_to u.name, user_summary_ttfpanel_path(u), remote: true  %></li>
-
-    <% end %>
+      <% end %>
     </ul>
 <% end %>
 

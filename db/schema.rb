@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151217043056) do
+ActiveRecord::Schema.define(version: 20151223050421) do
 
   create_table "allowed_users", force: :cascade do |t|
     t.string   "email"
@@ -37,9 +37,24 @@ ActiveRecord::Schema.define(version: 20151217043056) do
     t.string   "status",       default: "pending"
     t.datetime "created_at",                       null: false
     t.datetime "updated_at",                       null: false
+    t.text     "feedback"
   end
 
   add_index "holidays", ["user_id"], name: "index_holidays_on_user_id"
+
+  create_table "stats", force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "yearly_casual_leave",   default: 10
+    t.integer  "yearly_sick_leave",     default: 6
+    t.decimal  "carried_leave",         default: 0.0
+    t.decimal  "consumed_casual_leave", default: 0.0
+    t.decimal  "consumed_sick_leave",   default: 0.0
+    t.datetime "created_at",                          null: false
+    t.datetime "updated_at",                          null: false
+    t.date     "commence_date"
+  end
+
+  add_index "stats", ["user_id"], name: "index_stats_on_user_id"
 
   create_table "users", force: :cascade do |t|
     t.string   "email",                  default: "", null: false
@@ -61,6 +76,7 @@ ActiveRecord::Schema.define(version: 20151217043056) do
     t.integer  "sttf_id"
     t.string   "provider"
     t.string   "uid"
+    t.date     "joining_date"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true

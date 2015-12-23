@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+</head>
+<body>
+<h1>Name: <%= @user.name %></h1>
+<h2>Email: <%= @user.email %></h2>
+<h2>Request for <%= pluralize(@days.size, "day") %> Leave</h2><hr/>
+<h2>Reason: <%= @reason %></h2><hr/>
+<h3>Days</h3><hr/>
+<table border="2px">
+  <thead>
+    <tr>
+      <th>Date</th>
+      <th>Duration</th>
+    </tr>
+  </thead>
+  <tbody>
+      <% @days.each do |d| %>
+        <tr>
+          <td><%= d.the_date.strftime("%a, %d %b, %Y") %></td>
+          <td><%= number_to_human(d.hours) + " Hours" %></td>
+        </tr>
+      <% end %>
+
+  </tbody>
+</table>
+
+
+
+<h3>Description</h3><hr/>
+<p><%= @description %></p><br/>
+
+<%= holiday_url(@holiday, host: 'localhost:3000') %>
+
+</body>
+</html>

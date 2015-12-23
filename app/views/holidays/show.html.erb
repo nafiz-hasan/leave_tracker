@@ -1,29 +1,42 @@
 <p id="notice"><%= notice %></p>
 
-<p>
-  <strong>User:</strong>
-  <%= @holiday.user %>
-</p>
+<%= render 'show' %>
 
-<p>
-  <strong>Reason:</strong>
-  <%= @holiday.reason %>
-</p>
+<% if current_user_holiday? %>
+  <%= link_to 'Edit', edit_holiday_path(@holiday) %> |
+  <%= link_to 'Back', holidays_path %>
+<% end %>
 
-<p>
-  <strong>Description:</strong>
-  <%= @holiday.description %>
-</p>
+<% if current_ttf_holiday? %>
 
-<p>
-  <strong>Type:</strong>
-  <%= @holiday.holiday_type %>
-</p>
+  <div id="feedback">
 
-<p>
-  <strong>Status:</strong>
-  <%= @holiday.status %>
-</p>
+    <% if get_holiday_status == 'pending' %>
+        <%= form_tag(approve_holiday_path(@holiday), method: :put) do |f|%>
+            <%= label_tag "Feedback" %><br/>
+            <%= text_area_tag :feedback %><br/>
+            <%= submit_tag "Accept", class: "btn btn-success", value: "accept", name: "commit" %>
+            <%= submit_tag "Reject", class: "btn btn-danger", value: "reject", name: "commit" %>
+        <% end %>
+    <% end %>
 
-<%= link_to 'Edit', edit_holiday_path(@holiday) %> |
-<%= link_to 'Back', holidays_path %>
+    <% if get_holiday_status == 'approved' %>
+        <%= form_tag(reject_holiday_path(@holiday), method: :put) do |f|%>
+            <%= label_tag "Feedback" %><br/>
+            <%= text_area_tag :feedback %><br/>
+            <%= submit_tag "Cancel Approval", class: "btn btn-danger" %>
+        <% end %>
+    <% end %>
+
+
+    <% if get_holiday_status == 'rejected' %>
+      <%= form_tag(accept_holiday_path(@holiday), method: :put) do |f|%>
+        <%= label_tag "Feedback" %><br/>
+        <%= text_area_tag :feedback %><br/>
+        <%= submit_tag "Overturn Rejection", class: "btn btn-success" %>
+      <% end %>
+    <% end %>
+
+  </div>
+
+<% end %>

@@ -1,6 +1,7 @@
 class TtfpanelsController < ApplicationController
 
-  before_action :authenticate_ttf
+  before_action :authenticate_user!
+  before_action :authenticate_ttf, except: :user_summary #Need it to show the statistics modal for the regular user
 
   def index
     #@myapplications = Holiday.where(ttf_id: current_user)
@@ -12,7 +13,17 @@ class TtfpanelsController < ApplicationController
 
   def user_summary
     @my_user = User.find(params[:id])
-    @user_leaves = @my_user.holidays
+    @stat = @my_user.stat
+    #@user_leaves = @my_user.holidays
+    @yearly_casual_leave = @stat.yearly_casual_leave
+    @yearly_sick_leave = @stat.yearly_sick_leave
+
+    @gained_casual_leave = (@yearly_casual_leave * 8.0) + @stat.carried_leave
+    @gained_sick_leave = @yearly_sick_leave * 8.0
+
+    @balance_casual_leave = @gained_casual_leave - @stat.consumed_casual_leave
+    @balance_sick_leave = @gained_sick_leave - @stat.consumed_sick_leave
+
     respond_to do |format|
       format.html
       format.js

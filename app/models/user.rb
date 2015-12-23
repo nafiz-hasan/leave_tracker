@@ -8,6 +8,13 @@ class User < ActiveRecord::Base
   has_many :ttfs, class_name: "User", foreign_key: :sttf_id
   belongs_to :sttf, class_name: "User"
 
+  ##Defining associations
+  has_many :holidays
+  has_one :stat, dependent: :destroy
+
+  ##Creating leave statistics after creation of a new user
+  after_create :create_user_stat
+
   def self.names
     all.map(&:name)
   end
@@ -28,6 +35,23 @@ class User < ActiveRecord::Base
     end
   end
 
-  has_many :holidays
+  def create_user_stat
+    build_stat
+    true
+  end
+
+  rails_admin do
+    list do
+      configure :encrypted_password do
+        hide
+      end
+      configure :provider do
+        hide
+      end
+      configure :uid do
+        hide
+      end
+    end
+  end
 
 end

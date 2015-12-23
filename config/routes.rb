@@ -1,5 +1,11 @@
 Rails.application.routes.draw do
-  resources :holidays
+  resources :holidays do
+    member do
+      put :accept
+      put :reject
+      put :approve
+    end
+  end
   mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
   get 'home/index'
   devise_for :users, :controllers => { :omniauth_callbacks => "callbacks" }

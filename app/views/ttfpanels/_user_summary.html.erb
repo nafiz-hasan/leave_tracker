@@ -1,22 +1,48 @@
+<h2>Casual Leave Statistics</h2>
 <table class="table table-bordered table-striped">
-  <thead>
-  <tr>
-    <th>Reason</th>
-    <th>Intended Dates</th>
-    <td>Status</td>
-  </tr>
-  </thead>
+
   <tbody class="holiday-index">
-  <% @user_leaves.each do |h| %>
-    <tr>
-      <td><%= h.reason %></td>
-      <td>
-        <% h.days.each do |d| %>
-          <%= d.the_date.strftime("%a, %d %b, %Y") + "     Duration: " +number_to_human(d.hours)  %><br/>
-        <% end %>
-      </td>
-      <td><%= h.status %></td>
-    </tr>
-  <% end %>
+  <tbody class="holiday-index">
+  <tr>
+    <td>Yearly Due</td>
+    <td><%= @yearly_casual_leave %> Days </td>
+  </tr>
+  <tr>
+    <td>Carried Forward</td>
+    <td><%= @stat.carried_leave %></td>
+  </tr>
+  <tr>
+    <td>Total Due</td>
+    <td><%= @gained_casual_leave %></td>
+  </tr>
+  <tr>
+    <td>Total Consumed</td>
+    <td><%= @stat.consumed_casual_leave %></td>
+  </tr>
+  <tr>
+    <td>Balanace</td>
+    <td><%= @balance_casual_leave %></td>
+  </tr>
+  </tbody>
+  </tbody>
+</table>
+
+
+<h2>Sick Leave Statistics</h2>
+<table class="table table-bordered table-striped">
+
+  <tbody class="holiday-index">
+      <tr>
+        <td>Yearly Due</td>
+        <td><%= @yearly_sick_leave %> Days </td>
+      </tr>
+      <tr>
+        <td>Consumed</td>
+        <td><%= @stat.consumed_sick_leave %></td>
+      </tr>
+      <tr>
+        <td>Balanace</td>
+        <td><%= @balance_sick_leave %></td>
+      </tr>
   </tbody>
 </table>
